@@ -2,7 +2,9 @@
 
 ## What is this ?
 
-Todo
+This is a idea from [Tiantian Gao](https://github.com/gtt116)'s project [wait4disney](https://github.com/gtt116/wait4disney). However, I focus on the statistic of wait time, so I remove the **Heatmap** part in Gao's project.
+
+Hope that it would be helpful to you.
 
 ## Installation
 
@@ -10,7 +12,7 @@ Todo
 2. install grafana
 
 ```bash
-$ git clone git://github.com/gtt116/wait4disney
+$ https://github.com/HughWen/wait_disney
 $ cd wait_disney
 $ pip install -r requirements.txt
 $ python main.py
@@ -25,3 +27,5 @@ import it to give a try.
 ## Web Snapshot
 
 ![wait](./doc/demo_new.png)
+
+[demo link](https://snapshot.raintank.io/dashboard/snapshot/kxhb5XVk1PCnYIziG3qwX2DpJ1tIGbUT?orgId=2)
