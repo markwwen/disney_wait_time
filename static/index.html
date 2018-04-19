@@ -1,0 +1,287 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>迪斯尼指数</title>
+    <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="echarts.min.js"></script>
+    <style>
+    body {
+      padding: 0;
+      margin: 0;
+      background: #fdfdfd;
+    }
+
+    h1 {
+      padding: 12px;
+      margin: 0;
+      text-align: center;
+      color: #fff;
+      font-size: 20px;
+      background: #2f4554;
+      font-weight: normal;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      text-align:center;
+      margin: 20px auto 70px;
+    }
+
+    #year {
+      margin-top: 40px;
+      height: 700px;
+    }
+
+    #day {
+      padding-top: 30px;
+      border-top: 1px solid #c1c1c1;
+      height: 1000px;
+    }
+
+    #explain {
+      border-top: 1px solid #c1c1c1;
+      font-size: 16px;
+      color: #313131;
+      text-align: left;
+      margin-top: 25px;
+      padding-top: 20px;
+    }
+
+    #footer {
+      text-align: center;
+      font-size: 12px;
+      background: #2f4554;
+      color: #c7c7c7;
+      padding: 50px 0px;
+    }
+
+    #footer a{
+      color: #c7c7c7;
+    }
+    </style>
+</head>
+<body>
+    <a href="https://github.com/gtt116/wait4disney"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+    <h1>上海迪士尼排队情况</h1>
+    <div class="container">
+	    <div id="year">...</div>
+      <div id="day">...</div>
+      <div id="explain">
+        <h2>说明</h2>
+        <p>
+        数据来自迪斯尼官方接口，没有任何杜撰的成分。 开始统计的时间为2016年9月7日，在此之前没有数据，之后每天自动更新。
+        </p>
+        <p>
+        <b>使用技巧</b>：拖拉右下角范围选择工具，查看最拥挤或者最空闲的那几天。
+        </p>
+        <p>
+        <b>计算方法</b>：统计一天的排队时间，设定历史上最长等待时间那天的拥挤程度为1000分，
+        历史上最短等待时间那天拥挤程度为0分，其他按比例计算得分。
+        </p>
+      </div>
+    </div>
+    <div id="footer">
+      <p>
+      &copy2017 <a href="https://gaott.info/">gtt116</a>
+      </p>
+    </div>
+    <script type="text/javascript">
+      var yearChart = echarts.init(document.getElementById('year'));
+      var dayChart;
+
+      function get_data(date) {
+        console.debug("get date report: " + date)
+
+        var dayChart = echarts.init(document.getElementById('day'));
+
+        $.getJSON(date + '.json').done(function (data) {
+            option = {
+              title: {text: '单日情况: ' + data['date']},
+
+              toolbox: {
+                  feature: {
+                      saveAsImage: {},
+                      dataView: {}
+                  }
+              },
+              legend: {
+                data: ['最长等待时间', '平均等待时间'],
+                z: 10
+              },
+              tooltip: {
+                  trigger: 'axis',
+                  axisPointer: {
+                      type: 'shadow',
+                      label: {
+                          show: true
+                      }
+                  }
+              },
+              grid: {
+                left: '15%',
+                height: '150%'
+              },
+              xAxis: {
+                type: 'value',
+                splitLine: {
+                  show: false
+                },
+                axisLabel: {
+                  formatter: '{value} 分钟'
+                }
+              },
+              yAxis: {
+                type : 'category',
+                data: data['games']
+              },
+              series: [
+                  {
+                    name: '最长等待时间',
+                    type:'bar',
+                    data: data['max'],
+                    label: {
+                        normal: {
+                            position: 'right',
+                            formatter: "{c}分钟",
+                            show: true
+                        }
+                    }
+                  },
+                  {
+                    name: '平均等待时间',
+                    type:'bar',
+                    data: data['mean'],
+                    label: {
+                        normal: {
+                            position: 'right',
+                            formatter: "{c}分钟",
+                            show: true
+                        }
+                    }
+                  }
+              ]
+            };
+    
+            dayChart.setOption(option);
+        });
+      }
+
+      $.getJSON('year.json').done(function (data) {
+        option = {
+            title: {text: '年度热力图'},
+            tooltip: {
+                position: 'top'
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {},
+                    dataView: {}
+                }
+            },
+            visualMap: {
+                type: 'piecewise',
+                itemSymbol : 'triangle',
+                splitNumber: 6,
+                min: 0,
+                max: 1000,
+                calculable: true,
+                orient: 'horizontal',
+                left: 'center',
+                top: 'top',
+                z: 10,
+                text: ['拥挤', '空闲']
+            },
+
+            calendar: [
+            {
+                top: 90,
+                left: 40,
+                range: '2016',
+                cellSize: ['auto', 20],
+                dayLabel: {
+                  nameMap: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+                  firstDay: 1
+                },
+                monthLabel: {
+                  nameMap: 'cn'
+                },
+                yearLabel: {
+                  position: 'top'
+                }
+            },
+            {
+                left: 40,
+                top: 300,
+                range: '2017',
+                cellSize: ['auto', 20],
+                dayLabel: {
+                  nameMap: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+                  firstDay: 1
+                },
+                monthLabel: {
+                  nameMap: 'cn'
+                },
+                yearLabel: {
+                  position: 'top'
+                }
+            },
+            {
+                left: 40,
+                top: 520,
+                range: '2018',
+                cellSize: ['auto', 20],
+                dayLabel: {
+                  nameMap: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+                  firstDay: 1
+                },
+                monthLabel: {
+                  nameMap: 'cn'
+                },
+                yearLabel: {
+                  position: 'top'
+                }
+            }],
+
+            series: [
+              {
+                type: 'heatmap',
+                coordinateSystem: 'calendar',
+                calendarIndex: 0,
+                data: data
+              },
+              {
+                type: 'heatmap',
+                coordinateSystem: 'calendar',
+                calendarIndex: 1,
+                data: data
+              },
+              {
+                type: 'heatmap',
+                coordinateSystem: 'calendar',
+                calendarIndex: 2,
+                data: data
+              }
+            ]
+          };	
+
+          yearChart.setOption(option);
+          yearChart.on('click', function (params) {
+              date = params.value[0].split('T')[0]
+              get_data(date);
+          });
+        });
+
+        get_data('latest');
+
+        window.onresize = function(){
+          console.log('resize');
+          echarts.getInstanceByDom(document.getElementById('year')).resize();
+          echarts.getInstanceByDom(document.getElementById('day')).resize();
+        }
+
+    </script>
+</body>
+</html>
