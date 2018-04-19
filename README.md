@@ -14,7 +14,7 @@ Disneyland, the statistic will give me the answer.
 
 ```bash
 $ git clone git://github.com/gtt116/wait4disney
-$ cd wait4disney
+$ cd wait_disney
 $ pip install -r requirements.txt
 $ python main.py
 ```
