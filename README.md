@@ -2,7 +2,7 @@
 
 ## What is this ?
 
-This is a idea from [Tiantian Gao](https://github.com/gtt116)'s project [wait4disney](https://github.com/gtt116/wait4disney). However, I focus on the statistic of wait time, so I remove the **Heatmap** part in Gao's project.
+This is a idea from [Tiantian Gao](https://github.com/gtt116)'s project [wait4disney](https://github.com/gtt116/wait4disney). However, I focus on the statistic of wait time, so I remove the **Heatmap** part in Gao's project, and modify the spider part and fix the code to python3.
 
 Hope that it would be helpful to you.
 
