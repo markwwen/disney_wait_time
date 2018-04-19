@@ -28,4 +28,4 @@ import it to give a try.
 
 ![wait](./doc/demo_new.png)
 
-[demo link](https://snapshot.raintank.io/dashboard/snapshot/kxhb5XVk1PCnYIziG3qwX2DpJ1tIGbUT?orgId=2)
+[demo link](https://snapshot.raintank.io/dashboard/snapshot/Faff5WVVo6QQ4EM4xuBfAcOLJdSqv0hL)
