@@ -97,7 +97,7 @@ def get_wait_time(token):
 
 
 def get_wait_time_list():
-    for _ in xrange(3):
+    for _ in range(3):
         try:
             token = get_token()
             response = get_wait_time(token)
