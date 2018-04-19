@@ -47,7 +47,7 @@ def crawl_loop():
         if hour >= 7 and hour <= 20:
             datapoints = make_datas()
             assert db.write_points(datapoints, database='disney', batch_size=50)
-            print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+        print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
         time.sleep(30)
 
 if __name__ == '__main__':
