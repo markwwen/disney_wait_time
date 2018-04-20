@@ -27,7 +27,7 @@ def get_influxdb():
     host = 'localhost'
     port = 8086
     user = 'root'
-    password = os.environ['influxdb_pwd']
+    password = os.environ['INFLUXDB_PWD']
     dbname = 'disney'
 
     db = influxdb.InfluxDBClient(host, port, user, password, dbname)
