@@ -28,3 +28,5 @@ import it to give a try.
 ![wait](./doc/demo.png)
 
 [demo link](https://snapshot.raintank.io/dashboard/snapshot/Faff5WVVo6QQ4EM4xuBfAcOLJdSqv0hL)
+
+<iframe src="https://snapshot.raintank.io/dashboard-solo/snapshot/jySIIxV0eNoJ1D5oX2gZZsTxPO7Kwpsy?panelId=1&orgId=2&from=1524184847807&to=1524191715671" width="450" height="200" frameborder="0"></iframe>

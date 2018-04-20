@@ -3,7 +3,7 @@ import names
 import time
 import datetime
 import influxdb
-
+import os
 
 def make_datas():
     datapoints = []
@@ -27,7 +27,7 @@ def get_influxdb():
     host = 'localhost'
     port = 8086
     user = 'root'
-    password = 'root'
+    password = os.environ['influxdb_pwd']
     dbname = 'disney'
 
     db = influxdb.InfluxDBClient(host, port, user, password, dbname)
