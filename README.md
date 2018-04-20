@@ -20,12 +20,11 @@ $ python main.py
 The influxdb configration was hard coded at main.py, please feel free to change
 them to meet your environment.
 
-You can setup a crontab job to update disney waiting queue every minute.
 The grafana dashboard template locates at `wait_disney/doc/grafana.json`, you can
 import it to give a try.
 
 ## Web Snapshot
 
-![wait](./doc/demo_new.png)
+![wait](./doc/demo.png)
 
 [demo link](https://snapshot.raintank.io/dashboard/snapshot/Faff5WVVo6QQ4EM4xuBfAcOLJdSqv0hL)
