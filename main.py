@@ -35,7 +35,7 @@ def get_influxdb():
     return db
 
 
-def main():
+def crawl_one():
     db = get_influxdb()
     datapoints = make_datas()
     assert db.write_points(datapoints, database='disney', batch_size=50)
