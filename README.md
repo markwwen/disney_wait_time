@@ -20,7 +20,7 @@ $ python main.py
 The influxdb configration was hard coded at main.py, please feel free to change
 them to meet your environment.
 
-The grafana dashboard template locates at `wait_disney/doc/grafana.json`, you can
+The grafana dashboard template locates at `disney_wait_time/doc/grafana.json`, you can
 import it to give a try.
 
 ## Web Snapshot
