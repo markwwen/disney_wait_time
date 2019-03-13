@@ -1,4 +1,4 @@
-# Wait_Disney (等迪)
+# Disney Wait Time
 
 ## What is this ?
 
